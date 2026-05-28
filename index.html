@@ -453,40 +453,63 @@
   <div class="works-header">
     <div>
       <p class="section-label" style="color:rgba(184,147,74,0.8);">SELECTED WORKS</p>
+      <!-- 作品集 -->
+<section class="works" id="works">
+  <div class="works-header">
+    <div>
+      <p class="section-label" style="color:rgba(184,147,74,0.8);">SELECTED WORKS</p>
       <h2>作品集</h2>
     </div>
-    <a href="#">すべての作品を見る</a>
   </div>
   <div class="works-grid">
-    <div class="work-card reveal">
-      <div class="work-visual v1" style="background-image:url('takatora_toudou_7_R8.jpg');
-background-size:cover; background-position:center;">
-        <div class="work-icon">檜</div>
+    <div class="work-card reveal" onclick="openLightbox(0)">
+      <div class="work-visual v1" style="min-height:500px; background-image:url('takatora_toudou_7_R8.jpg'); background-size:cover; background-position:center;">
       </div>
       <div class="work-info">
         <p class="work-year">2026</p>
-        <p class="work-name">2026　藤堂高虎</p>
+        <p class="work-name">藤堂高虎</p>
         <p class="work-mat">檜 / 無垢仕上げ</p>
       </div>
     </div>
-    <div class="work-card reveal">
-      <div class="work-visual v2" style="background-image:url('horseride1_R8.jpg');
-background-size:cover; background-position:center;"><div class="work-icon">檜</div></div>
-      <div class="work-info"><p class="work-year">2026</p><p class="work-name">乗馬</p><p class="work-mat">檜 / 無垢仕上げ</p></div>
+    <div class="work-card reveal" onclick="openLightbox(1)">
+      <div class="work-visual v2" style="background-image:url('horseride1.jpg'); background-size:cover; background-position:center;">
+      </div>
+      <div class="work-info">
+        <p class="work-year">2026</p>
+        <p class="work-name">乗馬</p>
+        <p class="work-mat">檜 / 無垢仕上げ</p>
+      </div>
     </div>
-    <div class="work-card reveal">
-      <div class="work-visual v3"><div class="work-icon">杉</div></div>
-      <div class="work-info"><p class="work-year">2022</p><p class="work-name">杉の壁面収納</p><p class="work-mat">杉 / 柿渋塗装</p></div>
+    <div class="work-card reveal" onclick="openLightbox(2)">
+      <div class="work-visual v3">
+      </div>
+      <div class="work-info">
+        <p class="work-year">2025</p>
+        <p class="work-name">作品名</p>
+        <p class="work-mat">素材 / 仕上げ</p>
+      </div>
     </div>
-    <div class="work-card reveal">
-      <div class="work-visual v4"><div class="work-icon">松</div></div>
-      <div class="work-info"><p class="work-year">2021</p><p class="work-name">松の縁側</p><p class="work-mat">松 / 天然塗料仕上げ</p></div>
+    <div class="work-card reveal" onclick="openLightbox(3)">
+      <div class="work-visual v4">
+      </div>
+      <div class="work-info">
+        <p class="work-year">2024</p>
+        <p class="work-name">作品名</p>
+        <p class="work-mat">素材 / 仕上げ</p>
+      </div>
     </div>
-    <div class="work-card reveal">
-      <div class="work-visual v5"><div class="work-icon">桜</div></div>
-      <div class="work-info"><p class="work-year">2021</p><p class="work-name">桜の椅子</p><p class="work-mat">桜 / オイル仕上げ</p></div>
+    <div class="work-card reveal" onclick="openLightbox(4)">
+      <div class="work-visual v5">
+      </div>
+      <div class="work-info">
+        <p class="work-year">2024</p>
+        <p class="work-name">作品名</p>
+        <p class="work-mat">素材 / 仕上げ</p>
+      </div>
     </div>
   </div>
+</section>
+
 </section>
 <section class="profile" id="profile">
   <div class="profile-visual reveal">
@@ -515,8 +538,162 @@ background-size:cover; background-position:center;"><div class="work-icon">檜</
   <span class="footer-logo">ARCHITECT & WOODCRAFTMAN YOSHI</span>
   <p>© 2026 ARCHITECT & WOODCRAFTMAN YOSHI Workshop. All rights reserved.</p>
   <p>手づくり・一点物 / 滋賀県甲賀市</p>
-</footer>
+</footer><!-- ライトボックス -->
+<div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:9000; align-items:center; justify-content:center; flex-direction:column;">
+  <button onclick="closeLightbox()" style="position:absolute; top:24px; right:32px; background:none; border:none; color:white; font-size:2.5rem; cursor:pointer;">✕</button>
+  <button onclick="prevPhoto()" style="position:absolute; left:24px; background:none; border:1px solid rgba(255,255,255,0.3); color:white; font-size:2rem; cursor:pointer; padding:12px 20px;">‹</button>
+  <button onclick="nextPhoto()" style="position:absolute; right:24px; background:none; border:1px solid rgba(255,255,255,0.3); color:white; font-size:2rem; cursor:pointer; padding:12px 20px;">›</button>
+  <img id="lightbox-img" src="" style="max-height:80vh; max-width:85vw; object-fit:contain;">
+  <div id="lightbox-caption" style="color:rgba(255,255,255,0.7); margin-top:20px; font-size:0.85rem; letter-spacing:0.2em; text-align:center;"></div>
+  <div id="lightbox-counter" style="color:rgba(255,255,255,0.4); margin-top:8px; font-size:0.7rem; letter-spacing:0.15em;"></div>
+</div>
+
 <script>
+  // ライトボックス用データ（写真と説明を登録）
+  const photos = [
+    { src: 'takatora_toudou_7_R8.jpg', caption: '藤堂高虎　檜 / 無垢仕上げ' },
+    { src: 'horseride1_R8.jpg',   caption: '乗馬　檜 / 無垢仕上げ' },
+    { src: '',              caption: '作品名' },
+    { src: '',              caption: '作品名' },
+    { src: '',              caption: '作品名' },
+  ];
+
+  let current = 0;
+  const lb = document.getElementById('lightbox');
+
+  function openLightbox(index) {
+    current = index;
+    showPhoto();
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function showPhoto() {
+    const p = photos[current];
+    document.getElementById('lightbox-img').src = p.src;
+    document.getElementById('lightbox-caption').textContent = p.caption;
+    document.getElementById('lightbox-counter').textContent = (current + 1) + ' / ' + photos.length;
+  }
+
+  function prevPhoto() {
+    current = (current - 1 + photos.length) % photos.length;
+    showPhoto();
+  }
+
+  function nextPhoto() {
+    current = (current + 1) % photos.length;
+    showPhoto();
+  }
+
+  // 背景クリックで閉じる
+  lb.addEventListener('click', function(e) {
+    if (e.target === lb) closeLightbox();
+  });
+
+  // キーボード操作
+  document.addEventListener('keydown', function(e) {
+    if (lb.style.display === 'flex') {
+      if (e.key === 'ArrowRight') nextPhoto();
+      if (e.key === 'ArrowLeft')  prevPhoto();
+      if (e.key === 'Escape')     closeLightbox();
+    }
+  });
+
+  // スクロールアニメーション
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+<!-- ライトボックス -->
+<div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:9000; align-items:center; justify-content:center; flex-direction:column;">
+  <button onclick="closeLightbox()" style="position:absolute; top:24px; right:32px; background:none; border:none; color:white; font-size:2.5rem; cursor:pointer;">✕</button>
+  <button onclick="prevPhoto()" style="position:absolute; left:24px; background:none; border:1px solid rgba(255,255,255,0.3); color:white; font-size:2rem; cursor:pointer; padding:12px 20px;">‹</button>
+  <button onclick="nextPhoto()" style="position:absolute; right:24px; background:none; border:1px solid rgba(255,255,255,0.3); color:white; font-size:2rem; cursor:pointer; padding:12px 20px;">›</button>
+  <img id="lightbox-img" src="" style="max-height:80vh; max-width:85vw; object-fit:contain;">
+  <div id="lightbox-caption" style="color:rgba(255,255,255,0.7); margin-top:20px; font-size:0.85rem; letter-spacing:0.2em; text-align:center;"></div>
+  <div id="lightbox-counter" style="color:rgba(255,255,255,0.4); margin-top:8px; font-size:0.7rem; letter-spacing:0.15em;"></div>
+</div>
+
+<script>
+  // ライトボックス用データ（写真と説明を登録）
+  const photos = [
+    { src: 'takatora_toudou_7_R8.jpg', caption: '藤堂高虎　檜 / 無垢仕上げ' },
+    { src: 'horseride1_R8.jpg',   caption: '乗馬　檜 / 無垢仕上げ' },
+    { src: '',              caption: '作品名' },
+    { src: '',              caption: '作品名' },
+    { src: '',              caption: '作品名' },
+  ];
+
+  let current = 0;
+  const lb = document.getElementById('lightbox');
+
+  function openLightbox(index) {
+    current = index;
+    showPhoto();
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function showPhoto() {
+    const p = photos[current];
+    document.getElementById('lightbox-img').src = p.src;
+    document.getElementById('lightbox-caption').textContent = p.caption;
+    document.getElementById('lightbox-counter').textContent = (current + 1) + ' / ' + photos.length;
+  }
+
+  function prevPhoto() {
+    current = (current - 1 + photos.length) % photos.length;
+    showPhoto();
+  }
+
+  function nextPhoto() {
+    current = (current + 1) % photos.length;
+    showPhoto();
+  }
+
+  // 背景クリックで閉じる
+  lb.addEventListener('click', function(e) {
+    if (e.target === lb) closeLightbox();
+  });
+
+  // キーボード操作
+  document.addEventListener('keydown', function(e) {
+    if (lb.style.display === 'flex') {
+      if (e.key === 'ArrowRight') nextPhoto();
+      if (e.key === 'ArrowLeft')  prevPhoto();
+      if (e.key === 'Escape')     closeLightbox();
+    }
+  });
+
+  // スクロールアニメーション
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
